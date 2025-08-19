@@ -1,0 +1,20 @@
+﻿.blockquote-1 {
+    box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.2);
+    margin: 16px 16px 30px 16px;
+    padding: 16px 24px;
+    position: relative;
+    font-size: 16px;
+    background: #efefef;
+    color: #000;
+    font-style: italic;
+}
+
+.blockquote-1 cite {
+    position: absolute;
+    bottom: -24px;
+    left: 62px;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 300;
+    color: #000;
+}

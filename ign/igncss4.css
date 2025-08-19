@@ -1,0 +1,27 @@
+﻿.scroller {
+  height: 500px;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+}
+
+.scroller section {
+  scroll-snap-align: start;
+}
+
+
+
+
+
+
+
+
+
+.scroller {
+  overflow: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scroller::-webkit-scrollbar {
+ display: none;
+}

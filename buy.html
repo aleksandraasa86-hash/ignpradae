@@ -1,0 +1,227 @@
+﻿<!DOCTYPE html>
+
+<!-- saved from url=(0039)http://pod-system.zzz.com.ua/zakaz.html -->
+
+
+
+<html lang="ru">
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+ 
+
+
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+
+
+ <title>Информация пользователя</title>
+
+
+
+<style>
+    html,     .container {
+      padding: 20px;
+      max-width: 500px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      min-height: 100%;
+    }
+
+    .block {
+      margin-bottom: 20px;
+    }
+
+    .block label {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .block input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .submit-button {
+      width: 100%;
+      padding: 12px;
+      background-color: #00c896;
+      color: white;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+      box-sizing: border-box; /* Убедитесь, что кнопка занимает всю ширину родителя */
+    }
+
+    .submit-button:hover {
+      background-color: #00b184;
+    }
+
+    .output {
+      margin-top: 20px;
+      background-color: #f4f4f4;
+      padding: 15px;
+      border-radius: 5px;
+      color: #333;
+    }
+
+    .application-number {
+      font-size: 22px;
+      font-weight: bold;
+      color: #ff6347; /* Яркий цвет для заметной надписи */
+    }
+
+    .highlight-text {
+      font-size: 24px;
+      font-weight: bold;
+      color: #ff4500; /* Яркий цвет для "Заявка" */
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  </style>
+
+
+
+<style>
+ 
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  width: 200px; /* Пример ширины */
+  height: auto; /* Пример высоты, автоматически подстраивается под ширину */
+}
+
+</style>
+
+
+
+
+
+
+
+
+
+
+<div class="logo-container">
+  <img src="./ign/234234.png" alt="Логотип" class="logo">
+</div>
+
+</head>
+
+
+
+<body>
+
+
+
+
+ <div class="container">
+  
+
+  <!-- Яркое слово "Заявка" -->
+ 
+
+   <h2 class="highlight-text">Покупка Бита</h2>
+
+  
+
+  <div class="block">
+ 
+
+     <label for="name">Ваш логин телеграмм:</label>
+
+      <input type="text" id="name" placeholder="Введите ваш ник телеграмм">
+    </div>
+    
+    <div class="block">
+      <label for="phone">Ваш номер телефона:</label>
+      <input type="tel" id="phone" placeholder="Номер Viber">
+    </div>
+
+    <div class="block">
+      <label for="city">Город:</label>
+      <input type="text" id="city" placeholder="Введите ваш город">
+    </div>
+
+    <div class="block">
+      <label for="post-office">Адрес для такси:</label>
+      <input type="text" id="post-office" placeholder="Введите адрес для такси Uklon">
+    </div>
+
+    <!-- Кнопка отправки -->
+    <button class="submit-button" onclick="submitForm()">Отправить</button>
+  </div>
+
+  <div id="output" class="output"></div>
+
+  <script>
+    // Переменная для отслеживания номера заявки
+    let applicationNumber = 1;
+
+    function submitForm() {
+      const name = document.getElementById('name').value;
+      const phone = document.getElementById('phone').value;
+      const city = document.getElementById('city').value;
+      const postOffice = document.getElementById('post-office').value;
+
+      // Создание сообщения для отправки
+      const message = `Новая заявка:\n\nИмя Фамилия: ${name}\nНомер телефона: ${phone}\nГород: ${city}\nВведите адрес для такси Uklon: ${postOffice}`;
+
+      // Отправка данных в Telegram
+      const botToken = '7636103755:AAE-c_fF35-vHczOJYKXdDCxiYs_zWM9r1o'; // замените на свой токен
+      const chatId = '6691088824'; // замените на свой chat_id
+
+      const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          if (data.ok) {
+            alert('Заявка успешно отправлена в Telegram!');
+          } else {
+            alert('Ошибка при отправке заявки.');
+          }
+        })
+        .catch(error => {
+          console.error('Ошибка:', error);
+          alert('Произошла ошибка при отправке заявки.');
+        });
+
+      // Увеличиваем номер заявки
+      applicationNumber++;
+
+      // Выводим данные на странице
+      document.getElementById('output').innerHTML = `
+        <h3 class="application-number">Заявка №${applicationNumber - 1}</h3>
+        <p><strong>Данные, которые вы отправили:</strong></p>
+        <p><strong>Имя Фамилия:</strong> ${name}</p>
+        <p><strong>Номер телефона:</strong> ${phone}</p>
+        <p><strong>Город:</strong> ${city}</p>
+        <p><strong>Отделение Новой Почты:</strong> ${postOffice}</p>
+        <p><strong>Заявка была принята, Менеджер с Вами свяжется!</strong></p>
+        <p><strong>Номер телефона менеджера: +380509535150</strong></p>
+      `;
+    }
+  </script>
+
+
+
+</body></html>
